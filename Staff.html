@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Details Form</title>
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="CSS/Staff.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5 mb-4">Staff Details</h1>
+
+    <?php
+    // PHP code for processing form submission will go here
+
+    // Define variables and initialize with empty values
+    $id = $name = $designation = $email = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Process form data when form is submitted
+        $id = test_input($_POST["id"]);
+        $name = test_input($_POST["name"]);
+        $designation = test_input($_POST["designation"]);
+        $email = test_input($_POST["email"]);
+
+        // Display submitted data
+        echo "<p>ID: " . $id . "</p>";
+        echo "<p>Name: " . $name . "</p>";
+        echo "<p>Designation: " . $designation . "</p>";
+        echo "<p>Email: " . $email . "</p>";
+    }
+
+    // Function to sanitize form input
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    ?>
+
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" class="form-control" id="id" name="id" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="designation">Designation:</label>
+            <input type="text" class="form-control" id="designation" name="designation" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email ID:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
